@@ -7,7 +7,7 @@ RUN apt-get install -y --no-install-recommends
 RUN apt-get install -y --no-install-recommends ca-certificates
 RUN apt-get install -y --no-install-recommends curl
 RUN apt-get install -y --no-install-recommends node-less
-RUN apt-get install -y --no-install-recommends node-clean-css
+#RUN apt-get install -y --no-install-recommends node-clean-css
 RUN apt-get install -y --no-install-recommends python-gevent
 RUN apt-get install -y --no-install-recommends python-pip
 RUN apt-get install -y --no-install-recommends python-pyinotify
