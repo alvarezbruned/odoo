@@ -2,24 +2,24 @@ FROM ubuntu:12.04
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN set -x; \
-        apt-get update \
-        && apt-get install -y --no-install-recommends \
-            ca-certificates \
-            curl \
-            node-less \
-            node-clean-css \
-            python-gevent \
-            python-pip \
-            python-pyinotify \
-            python-renderpm \
-            python-support \
-        && curl -o wkhtmltox.deb -SL http://nightly.odoo.com/extra/wkhtmltox-0.12.1.2_linux-jessie-amd64.deb \
-        && echo '40e8b906de658a2221b15e4e8cd82565a47d7ee8 wkhtmltox.deb' | sha1sum -c - \
-        && dpkg --force-depends -i wkhtmltox.deb \
-        && apt-get -y install -f --no-install-recommends \
-        && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false npm \
-        && rm -rf /var/lib/apt/lists/* wkhtmltox.deb \
-        && pip install psycogreen==1.0
+        apt-get update
+RUN apt-get install -y --no-install-recommends
+RUN apt-get install -y --no-install-recommends ca-certificates
+RUN apt-get install -y --no-install-recommends curl
+RUN apt-get install -y --no-install-recommends node-less
+RUN apt-get install -y --no-install-recommends node-clean-css
+RUN apt-get install -y --no-install-recommends python-gevent
+RUN apt-get install -y --no-install-recommends python-pip
+RUN apt-get install -y --no-install-recommends python-pyinotify
+RUN apt-get install -y --no-install-recommends python-renderpm
+RUN apt-get install -y --no-install-recommends python-support
+RUN curl -o wkhtmltox.deb -SL http://nightly.odoo.com/extra/wkhtmltox-0.12.1.2_linux-jessie-amd64.deb
+RUN echo '40e8b906de658a2221b15e4e8cd82565a47d7ee8 wkhtmltox.deb' | sha1sum -c -
+RUN dpkg --force-depends -i wkhtmltox.deb
+RUN apt-get -y install -f --no-install-recommends
+RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false npm
+RUN rm -rf /var/lib/apt/lists/* wkhtmltox.deb
+RUN pip install psycogreen==1.0
 
 
 # Install Odoo
