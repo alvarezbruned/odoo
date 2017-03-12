@@ -31,8 +31,10 @@ RUN apt-get install -y bzr bzr-gtk bzrtools python python-egenix-mxdatetime pyth
 # Install Odoo
 ENV ODOO_VERSION 6.1
 ENV ODOO_RELEASE 20140210
-COPY odd_* .
-RUN cat odd* > odoo.deb
+COPY odd_aa .
+COPY odd_ab .
+COPY odd_ac .
+RUN cat odd_* > odoo.deb
 RUN set -x;
 #        curl -o odoo.deb -SL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
 #         echo 'cd8c1dc9d2ddf5a538381eed85871a2e343ec8ae odoo.deb' | sha1sum -c - \
