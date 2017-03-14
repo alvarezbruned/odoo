@@ -9,8 +9,9 @@ services:
       - "8069:8069"
     volumes:
       - odoo-web-data:/var/lib/odoo
-      - ./config:/etc/odoo
+#      - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
+#      - ./openerp-server.conf:/etc/odoo/openerp-server.conf
     environment:
       - USER=odoo
       - PASSWORD=myodoo
