@@ -1,28 +1,28 @@
 version: '2'
 services:
+  db:
+    image: postgres:9.5.11-alpine
+    environment:
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=odoo
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5444:5432"
   web:
-    image: albertalvarezbruned/odoo:6.1
+    build: .
+#    image: albertalvarezbruned/odoo
     depends_on:
       - db
     ports:
-      - "8071:8071"
-      - "8069:8069"
+      - "127.0.0.1:8069:8069"
     volumes:
       - odoo-web-data:/var/lib/odoo
-#      - ./config:/etc/odoo
+      - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
-#      - ./openerp-server.conf:/etc/odoo/openerp-server.conf
-    environment:
-      - USER=odoo
-      - PASSWORD=myodoo
-  db:
-    image: postgres:9.6.2
-    environment:
-      - POSTGRES_USER=odoo
-      - POSTGRES_PASSWORD=myodoo
-      - PGDATA=/var/lib/postgresql/data/pgdata
-    volumes:
-      - odoo-db-data:/var/lib/postgresql/data/pgdata
+      - ./openerp-server.conf:/etc/odoo/openerp-server.conf
 volumes:
   odoo-web-data:
   odoo-db-data:

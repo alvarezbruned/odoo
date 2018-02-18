@@ -1,4 +1,9 @@
 # odoo
-OpenERP 6.1.20140210
-postgres 9.6.2
-Ubuntu 12.04
+
+First manage databases, create a database odoo or some configured in docker-compose.yml
+
+Credentials to entry OpenErp:
+user:
+admin
+password:
+admin
