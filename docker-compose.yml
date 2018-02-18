@@ -9,6 +9,7 @@ services:
       - POSTGRES_DB=odoo
     volumes:
       - ./odoo-db-data:/var/lib/postgresql/data/pgdata
+      - ./tmp/postgresql:/var/run/postgresql
     ports:
       - "5444:5432"
   web:
@@ -22,6 +23,8 @@ services:
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
       - ./openerp-server.conf:/etc/odoo/openerp-server.conf
+      - ./tmp/oe-sessions-odoo:/tmp/oe-sessions-odoo
+      - ./tmp/lib/odoo:/var/lib/odoo
 volumes:
   odoo-web-data:
   odoo-db-data:
