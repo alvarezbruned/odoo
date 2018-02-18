@@ -12,8 +12,7 @@ services:
     ports:
       - "5444:5432"
   web:
-    build: .
-#    image: albertalvarezbruned/odoo
+    image: albertalvarezbruned/odoo
     depends_on:
       - db
     ports:
@@ -23,7 +22,6 @@ services:
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
       - ./openerp-server.conf:/etc/odoo/openerp-server.conf
-#      - ./oe-sessions-odoo:/tmp/oe-sessions-odoo
 volumes:
   odoo-web-data:
   odoo-db-data:
