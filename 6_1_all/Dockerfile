@@ -22,7 +22,8 @@ RUN dpkg --force-depends -i /tmp/open.deb
         RUN apt-get update \
         && apt-get -y install -f --no-install-recommends
         RUN rm -rf /var/lib/apt/lists/* /tmp/open.deb
-
+RUN rm /tmp/odd*
+RUN rm /tmp/ope*
 
 RUN mkdir -p /home/odoo
 WORKDIR /home/odoo
