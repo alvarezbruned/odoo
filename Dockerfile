@@ -30,13 +30,6 @@ RUN apt-get install -y postgresql-client \
  python-zsi
 
 RUN apt-get -f install -y
-RUN curl -fsSL http://nightly.odoo.com/old/openerp-6.1/6.1.0/openerp_6.1-1-1_all.deb -o /tmp/open.deb
-
-RUN chmod +x /tmp/open.deb
-RUN dpkg --force-depends -i /tmp/open.deb
-        RUN apt-get update \
-        && apt-get -y install -f --no-install-recommends
-        RUN rm -rf /var/lib/apt/lists/* /tmp/open.deb
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
@@ -66,5 +59,3 @@ ENV OPENERP_SERVER /etc/odoo/openerp-server.conf
 # Set default user when running the container
 USER odoo
 
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["openerp-server"]
