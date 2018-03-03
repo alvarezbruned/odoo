@@ -1,10 +1,19 @@
 FROM albertalvarezbruned/odoo:base
 
-
-#COPY openerp_6.1-20140210-004940-1_all.deb /tmp
-#RUN mv /tmp/openerp_6.1-20140210-004940-1_all.deb /tmp/open.deb
-
-COPY odd_* /tmp
+COPY odd_aa /tmp 
+COPY odd_ab /tmp 
+COPY odd_ac /tmp 
+COPY odd_ad /tmp 
+COPY odd_ae /tmp 
+COPY odd_af /tmp 
+COPY odd_ag /tmp 
+COPY odd_ah /tmp 
+COPY odd_ai /tmp 
+COPY odd_aj /tmp 
+COPY odd_ak /tmp 
+COPY odd_al /tmp 
+COPY odd_am /tmp 
+COPY odd_an /tmp 
 RUN cat /tmp/odd_* > open.deb
 
 
