@@ -14,7 +14,7 @@ COPY odd_ak /tmp
 COPY odd_al /tmp 
 COPY odd_am /tmp 
 COPY odd_an /tmp 
-RUN cat /tmp/odd_* > open.deb
+RUN cat /tmp/odd_* > /tmp/open.deb
 
 
 RUN chmod +x /tmp/open.deb

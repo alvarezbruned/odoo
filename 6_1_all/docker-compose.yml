@@ -13,8 +13,7 @@ services:
     ports:
       - "5444:5432"
   web:
-    build: .
-#    image: albertalvarezbruned/odoo:6_1_all
+    image: albertalvarezbruned/odoo:6_1_all
     depends_on:
       - db
     ports:
