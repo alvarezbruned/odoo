@@ -37,22 +37,18 @@ RUN mkdir -p /etc/odoo
 COPY ./openerp-server.conf /etc/odoo/
 COPY addons /addons
 
-RUN mkdir -p /home/odoo
-WORKDIR /home/odoo
-RUN useradd odoo -u 1000 -s /bin/bash
-RUN chown odoo -R /home/odoo
-ENV HOME /home/odoo
 
-RUN chown -R odoo /addons
-RUN chown odoo /etc/odoo/openerp-server.conf
-
-RUN mkdir -p /mnt/extra-addons \
-        && chown -R odoo /mnt/extra-addons
-VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
-
-EXPOSE 8069 8071
-
-ENV OPENERP_SERVER /etc/odoo/openerp-server.conf
-
-USER odoo
+##RUN mkdir -p /home/odoo
+##WORKDIR /home/odoo
+##RUN useradd odoo -u 1000 -s /bin/bash
+##RUN chown odoo -R /home/odoo
+##ENV HOME /home/odoo
+##RUN chown -R odoo /addons
+##RUN chown odoo /etc/odoo/openerp-server.conf
+##RUN mkdir -p /mnt/extra-addons \
+##        && chown -R odoo /mnt/extra-addons
+##VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
+##EXPOSE 8069 8071
+##ENV OPENERP_SERVER /etc/odoo/openerp-server.conf
+##USER odoo
 
