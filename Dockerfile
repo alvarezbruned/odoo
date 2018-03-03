@@ -33,29 +33,26 @@ RUN apt-get -f install -y
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
+RUN mkdir -p /etc/odoo
 COPY ./openerp-server.conf /etc/odoo/
+COPY addons /addons
 
 RUN mkdir -p /home/odoo
 WORKDIR /home/odoo
 RUN useradd odoo -u 1000 -s /bin/bash
 RUN chown odoo -R /home/odoo
 ENV HOME /home/odoo
-COPY addons /addons
 
 RUN chown -R odoo /addons
 RUN chown odoo /etc/odoo/openerp-server.conf
 
-# Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
 RUN mkdir -p /mnt/extra-addons \
         && chown -R odoo /mnt/extra-addons
 VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
 
-# Expose Odoo services
 EXPOSE 8069 8071
 
-# Set the default config file
 ENV OPENERP_SERVER /etc/odoo/openerp-server.conf
 
-# Set default user when running the container
 USER odoo
 
