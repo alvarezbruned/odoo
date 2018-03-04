@@ -6,4 +6,4 @@ Credentials to entry OpenErp:
 user:
 admin
 password:
-admin
+the password you assign in Manage BBDD section
