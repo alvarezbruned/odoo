@@ -22,7 +22,7 @@ services:
       - ./odoo-web-data:/var/lib/odoo
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
-#      - ./openerp-server.conf:/etc/odoo/openerp-server.conf
+      - ./openerp-server.conf:/etc/odoo/openerp-server.conf
       - ./tmp/oe-sessions-odoo:/tmp/oe-sessions-odoo
       - ./tmp/lib/odoo:/var/lib/odoo
 volumes:
