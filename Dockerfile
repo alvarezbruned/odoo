@@ -4,6 +4,8 @@ RUN apt-get update && apt-get install -y curl
 RUN apt-get -y install python
 RUN apt-get -f install -y
 
+RUN apt-get install -y xvfb libfontconfig wkhtmltopdf
+
 RUN apt-get install -y postgresql-client \
  python-dateutil \
  python-feedparser \
