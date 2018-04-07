@@ -1,8 +1,12 @@
 FROM ubuntu:14.04
 
+
+
 RUN apt-get update && apt-get install -y curl
 RUN apt-get -y install python
 RUN apt-get -f install -y
+
+RUN apt-get install -y xvfb libfontconfig wkhtmltopdf
 
 RUN apt-get install -y postgresql-client \
  python-dateutil \
@@ -38,17 +42,4 @@ COPY ./openerp-server.conf /etc/odoo/
 COPY addons /addons
 
 
-##RUN mkdir -p /home/odoo
-##WORKDIR /home/odoo
-##RUN useradd odoo -u 1000 -s /bin/bash
-##RUN chown odoo -R /home/odoo
-##ENV HOME /home/odoo
-##RUN chown -R odoo /addons
-##RUN chown odoo /etc/odoo/openerp-server.conf
-##RUN mkdir -p /mnt/extra-addons \
-##        && chown -R odoo /mnt/extra-addons
-##VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
-##EXPOSE 8069 8071
-##ENV OPENERP_SERVER /etc/odoo/openerp-server.conf
-##USER odoo
 
