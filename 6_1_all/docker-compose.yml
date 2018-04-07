@@ -10,8 +10,25 @@ services:
     volumes:
       - ./odoo-db-data:/var/lib/postgresql/data/pgdata
       - ./tmp/postgresql:/var/run/postgresql
+      - ./sql/init.dump:/tmp/init.dump:ro
     ports:
       - "5444:5432"
+  pgadmin:
+# user admin pass admin
+    links:
+      - db:postgres
+    image: zfil/pgadmin3
+    volumes:
+       - ./odoo-pgadmin/home:/home
+       - ./odoo-pgadmin/root:/root
+       - ./sql/init.dump:/tmp/init.dump:ro
+    ports:
+      - "5050:5050"
+    environment:
+      - DEFAULT_USER=odoo@odoo.com
+      - DEFAULT_PASSWORD=odoo
+      - DISPLAY=$DISPLAY_MAC
+    restart: unless-stopped
   web:
     image: albertalvarezbruned/odoo:6_1_all
     depends_on:
