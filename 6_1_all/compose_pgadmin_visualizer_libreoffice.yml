@@ -1,0 +1,77 @@
+version: '2'
+services:
+  libreoffice:
+    image: 'albertalvarezbruned/libreoffice:3_5_7_2'
+    container_name: 'libreoffice_ioc'
+    volumes:
+      - ./odoo-pgadmin-libreoffice:/odoo-pgadmin-libreoffice
+      - '/Users/albertojorgealvarezbruned/Documents/IOC:/home/libreofficeuser/IOC'
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=$DISPLAY_MAC
+#for linux      - DISPLAY=:0
+  db:
+    container_name: '61all_db_1'
+    image: postgres:9.5.11-alpine
+    environment:
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - POSTGRES_DB=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - ./odoo-db-data:/var/lib/postgresql/data/pgdata
+      - ./tmp/postgresql:/var/run/postgresql
+      - ./sql/init.dump:/tmp/init.dump:ro
+    ports:
+      - "5444:5432"
+    depends_on:
+      - libreoffice
+  dbvisualizer:
+    image: kurron/docker-dbvisualizer
+    container_name: "dbvisualizer"
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./odoo-visualizaer:/home/developer
+      - ./odoo-visualizaer/tmp:/tmp
+    environment:
+      - DISPLAY=$DISPLAY_MAC
+#for linux      - DISPLAY=:0
+    user: 1000:1000
+  pgadmin:
+    links:
+      - db:postgres
+    image: zfil/pgadmin3
+    volumes:
+      - ./odoo-pgadmin-libreoffice:/odoo-pgadmin-libreoffice
+      - ./odoo-pgadmin/home:/home
+      - ./odoo-pgadmin/root:/root
+      - ./sql/init.dump:/tmp/init.dump:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    ports:
+      - "5050:5050"
+    environment:
+      - DEFAULT_USER=odoo@odoo.com
+      - DEFAULT_PASSWORD=odoo
+      - DISPLAY=$DISPLAY_MAC
+#for linux      - DISPLAY=:0
+    restart: unless-stopped
+  web:
+    container_name: '61all_web_1'
+    image: albertalvarezbruned/odoo:6_1_all
+    depends_on:
+      - db
+      - libreoffice
+    ports:
+      - "127.0.0.1:8069:8069"
+    volumes:
+      - ./odoo-pgadmin-libreoffice:/odoo-pgadmin-libreoffice
+      - ./odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+      - ./openerp-server.conf:/etc/odoo/openerp-server.conf
+      - ./tmp/oe-sessions-odoo:/tmp/oe-sessions-odoo
+      - ./tmp/lib/odoo:/var/lib/odoo
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+  odoo-pgadmin-libreoffice:
