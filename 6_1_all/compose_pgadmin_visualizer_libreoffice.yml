@@ -8,8 +8,8 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ./odoo-pgadmin-libreoffice/root:/root
     environment:
-      - DISPLAY=$DISPLAY_MAC
-#for linux      - DISPLAY=:0
+#      - DISPLAY=$DISPLAY_MAC
+      - DISPLAY=:0
   db:
     container_name: '61all_db_1'
     image: postgres:9.5.11-alpine
@@ -34,8 +34,8 @@ services:
       - ./odoo-visualizaer:/home/developer
       - ./odoo-visualizaer/tmp:/tmp
     environment:
-      - DISPLAY=$DISPLAY_MAC
-#for linux      - DISPLAY=:0
+#      - DISPLAY=$DISPLAY_MAC
+      - DISPLAY=:0
     user: 1000:1000
   pgadmin:
     links:
@@ -52,8 +52,8 @@ services:
     environment:
       - DEFAULT_USER=odoo@odoo.com
       - DEFAULT_PASSWORD=odoo
-      - DISPLAY=$DISPLAY_MAC
-#for linux      - DISPLAY=:0
+#      - DISPLAY=$DISPLAY_MAC
+      - DISPLAY=:0
     restart: unless-stopped
   web:
     container_name: '61all_web_1'
