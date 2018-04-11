@@ -27,7 +27,7 @@ services:
     environment:
       - DEFAULT_USER=odoo@odoo.com
       - DEFAULT_PASSWORD=odoo
-      - DISPLAY=$DISPLAY_MAC
+      - DISPLAY=:0
     restart: unless-stopped
   web:
     image: albertalvarezbruned/odoo:6_1_all
